@@ -2,11 +2,23 @@ import React,{useState,useEffect} from "react";
 import axios from 'axios';
 
 
+// ------------------------------------------------
+
+// ------------------------------------------------
+
+
+
 const EmpList = () => {
     const [employees, setEmployees] = useState([]);
     const [editing, setEditing] = useState(false);
     const [currentEmployee, setCurrentEmployee] = useState({id:null,empid:null,name:'',address:'',position:'',salary:null,experiance:null,phone:null,email:''});
 
+        const handleClick =() =>{
+            //force a page reload
+            window.location.reload();
+        };
+        
+    
 
     useEffect(() => {
         axios.get('https://aiswarya2325.pythonanywhere.com/employemanagement/employees/')
@@ -41,6 +53,7 @@ const EmpList = () => {
 
 
     return(
+        <>
         <div className="container mt-3">
             <h2>Employee List</h2>
             <table className="table table-bordered table-hover text-center">
@@ -84,6 +97,7 @@ const EmpList = () => {
                 />
             ): null}
         </div>
+        </>
     );
 };
 
@@ -108,6 +122,9 @@ const handleSubmit = (e) => {
     updateEmployee(employee.id, employee);
 };
 return(
+
+
+    
     <form onSubmit={handleSubmit}>
         <h2>Edit Employee</h2>
 
@@ -192,6 +209,10 @@ return(
             />
         </div>
 
+{/* ------------------------------------------------- */}
+
+
+{/* ------------------------------------------------- */}
 
 
 
