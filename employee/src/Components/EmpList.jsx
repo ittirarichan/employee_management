@@ -136,7 +136,7 @@ return(
         <div>
         <label>Address</label>
             <textarea
-            name="Address"
+            name="address"
             value={employee.address}
             onChange={handleInputChange}
             />
