@@ -14,7 +14,7 @@ function App() {
     <Routes>
       <Route Path='/' element={<Layout/>} >
       <Route index element={<EmpList/>}/>
-      <Route Path='addemp' element={<AddEmp/>}/>
+      {/* <Route Path='addemp' element={<AddEmp/>}/> */}
       <Route path='add' element={<About/>}/>
 
       </Route>

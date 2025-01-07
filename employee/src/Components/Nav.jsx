@@ -9,7 +9,7 @@ function Layout(){
         <>
         <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
         <div className="container-fluid">
-            <a className="navbar-brand" href="/">UrbanCart</a>
+            <a className="navbar-brand" href="/">Employee Managment</a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
             <span className="navbar-toggler-icon"></span>
             </button>
@@ -18,15 +18,15 @@ function Layout(){
                 <li className="nav-item">
                 <Link to="/" className="nav-link" onClick={handleClick}>Home</Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                 <Link to="/AddEmp" className="nav-link">addemp</Link>
-                </li>
+                </li> */}
                 <li className="nav-item">
                 <Link to="/Add" className="nav-link">Add</Link>
                 </li>    
-                <li className="nav-item">
+                {/* <li className="nav-item">
                 <Link to="/Product" className="nav-link">Product</Link>
-                </li>    
+                </li>     */}
             </ul>
             </div>
         </div>

@@ -2,14 +2,13 @@ import React,{useState,useEffect} from "react";
 import axios from 'axios';
 
 
-// ------------------------------------------------
-
-// ------------------------------------------------
 
 
 
 const EmpList = () => {
     const [employees, setEmployees] = useState([]);
+    const [searchemp, setSearchEmp] = useState([]);
+    const [filteredemp, setFilteredEmp] = useState([]);
     const [editing, setEditing] = useState(false);
     const [currentEmployee, setCurrentEmployee] = useState({id:null,empid:null,name:'',address:'',position:'',salary:null,experiance:null,phone:null,email:''});
 
@@ -21,15 +20,18 @@ const EmpList = () => {
     
 
     useEffect(() => {
-        axios.get('https://aiswarya2325.pythonanywhere.com/employemanagement/employees/')
-            .then(response => setEmployees(response.data))
+        axios.get('http://127.0.0.1:8000/api/emp/')
+            .then(response => {
+                setEmployees(response.data)
+                setFilteredEmp(response.data)
+            })
             .catch(error => console.log(error));
     
     },[]);
 
 
     const deleteEmployee = (id) => {
-        axios.delete(`https://aiswarya2325.pythonanywhere.com/employemanagement/employees/${id}/`)
+        axios.delete(`http://127.0.0.1:8000/api/emp/${id}/`)
         .then(response => {
             setEmployees(employees.filter (employee => employee.id !== id ));
         })
@@ -44,18 +46,26 @@ const EmpList = () => {
 
     const updateEmployee = (id, updateEmployee) => {
         setEditing(false);
-        axios.put(`https://aiswarya2325.pythonanywhere.com/employemanagement/employees/${id}/`, updateEmployee)
+        axios.put(`http://127.0.0.1:8000/api/emp/${id}/`, updateEmployee)
         .then(response => {
             setEmployees(employees.map (employee => (employee.id === id ? response.data : employee)));
         })
         .catch(error => console.log(error));
     };
 
+    useEffect(() =>{
+        const result=employees.filter (employee =>
+            employee.name.includes(searchemp) || employee.address.includes(searchemp)
+        )
+        setFilteredEmp(result)
+    },[searchemp,employees])
+ 
 
     return(
         <>
         <div className="container mt-3">
             <h2>Employee List</h2>
+            <input type="text" placeholder="Search" value={searchemp} onChange={(e) => setSearchEmp(e.target.value)} />
             <table className="table table-bordered table-hover text-center">
                 <thead>
                     <tr>
@@ -72,7 +82,7 @@ const EmpList = () => {
                     </tr>
                 </thead>
                 <tbody>
-                {employees.map(employee => (
+                {filteredemp.map(employee => (
                     <tr key={employee.id}>
                         <td>{employee.empid}</td>
                         <td>{employee.name}</td>
@@ -209,10 +219,6 @@ return(
             />
         </div>
 
-{/* ------------------------------------------------- */}
-
-
-{/* ------------------------------------------------- */}
 
 
 

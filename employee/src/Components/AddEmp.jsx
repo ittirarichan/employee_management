@@ -11,14 +11,15 @@ const AddEmp = () => {
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
 
+    
     const handleClick =() =>{
         //force a page reload
-        window.location.reload();
+        // window.location.reload();
     };
     
-    const handleSubmit = (e) => {
+    const handleSubmit = (e) => {        
         e.preventDefault();
-        axios.post('https://aiswarya2325.pythonanywhere.com/employemanagement/employees/',{ empid, name, address, position, salary, experiance, phone, email })
+        axios.post('http://127.0.0.1:8000/api/emp/',{ empid, name, address, position, salary, experiance, phone, email })
             .then(response => {
                 console.log(response.data);
                 setEmpid('');
@@ -31,7 +32,7 @@ const AddEmp = () => {
                 setEmail('');
             })
             .catch(error => console.log(error));
-            handleClick()
+            // handleClick()
 }
 
 
